@@ -7,7 +7,7 @@ import copy
 
 def get_first_line_from_file(filepath: str) -> str:
     ret: str = ''
-    with open('./input.txt') as input_file_content:
+    with open(filepath) as input_file_content:
         ret = input_file_content.readline()
     return ret
 
