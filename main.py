@@ -20,6 +20,14 @@ class FrequencyCount:
     
     def __lt__(self, other):
         return self.count < other.count
+    
+    def __str__(self):
+        return f'({self.count}, {self.character})'
+    
+    def __repr__(self):
+        return str(self)
+    
+
 
 def construct_sorted_frequencies(string_to_be_counted_from: str) -> List[FrequencyCount]:
     counts: List[FrequencyCount] = []
@@ -35,4 +43,7 @@ def construct_sorted_frequencies(string_to_be_counted_from: str) -> List[Frequen
 
 if __name__ == '__main__':
     input_string = get_first_line_from_file('./input.txt')
+    sorted_frequencies = construct_sorted_frequencies(input_string)
     print(input_string)
+    print(sorted_frequencies)
+
