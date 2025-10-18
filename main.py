@@ -1,7 +1,34 @@
 #!/usr/bin/python3
-
+from functools import total_ordering
+from typing import List
 input_string: str = ''
 with open('./input.txt') as input_file_content:
     input_string = input_file_content.readline()
 print(input_string)
+
+@total_ordering  # auto implement bigger than etc etc given less than.
+class FrequencyCount:
+    count: int
+    character: str
+    def __init__(self, character) -> None:
+        self.count = 1
+        self.character = character
+    
+    def __eq__(self, other):
+        return self.count == other.count
+    
+    def __lt__(self, other):
+        return self.count < other.count
+
+def construct_sorted_frequencies(string_to_be_counted_from: str) -> List[FrequencyCount]:
+    counts: List[FrequencyCount] = []
+    # sort the input string so that I can just add all the characters that are alike at a time.
+    # could also use a dict for this, but I prefer this way.
+    for character in sorted(string_to_be_counted_from):
+        if len(counts) != 0 and counts[-1].character == character:
+            counts[-1].character
+        else:
+            counts.append(FrequencyCount(character))
+    return sorted(counts)
+
 
