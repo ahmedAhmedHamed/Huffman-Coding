@@ -37,7 +37,7 @@ class FrequencyCountNode:
 
     def __repr__(self):
         return str(self)
-    
+
 
 def construct_sorted_frequencies(string_to_be_counted_from: str) -> List[FrequencyCountNode]:
     counts: List[FrequencyCountNode] = []
@@ -49,6 +49,7 @@ def construct_sorted_frequencies(string_to_be_counted_from: str) -> List[Frequen
         else:
             counts.append(FrequencyCountNode(character))
     return sorted(counts, reverse=True)
+
 
 def construct_new_level_in_huffman_tree(current_level: List[FrequencyCountNode]) -> List[FrequencyCountNode]:
     
@@ -63,11 +64,13 @@ def construct_new_level_in_huffman_tree(current_level: List[FrequencyCountNode])
     new_level.append(new_node)
     return sorted(new_level)
 
+
 def construct_huffman_tree(sorted_frequencies: List[FrequencyCountNode]) -> FrequencyCountNode:
     new_level = construct_new_level_in_huffman_tree(sorted_frequencies)
     while len(new_level) > 1:
         new_level = construct_new_level_in_huffman_tree(new_level)
     return new_level[0]
+
 
 if __name__ == '__main__':
     input_string = get_first_line_from_file('./input.txt')
