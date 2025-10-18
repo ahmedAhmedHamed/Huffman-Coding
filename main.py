@@ -58,6 +58,7 @@ def construct_new_level_in_huffman_tree(current_level: List[FrequencyCountNode])
     new_node = FrequencyCountNode()
     new_node.leftChild = smallest_frequency
     new_node.rightChild = second_smallest
+    new_node.count = new_node.leftChild.count + new_node.rightChild.count
     new_level.pop()
     new_level.pop()
     new_level.append(new_node)
