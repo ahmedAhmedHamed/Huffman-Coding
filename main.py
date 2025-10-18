@@ -61,7 +61,7 @@ def construct_new_level_in_huffman_tree(current_level: List[FrequencyCountNode])
     new_level.pop()
     new_level.pop()
     new_level.append(new_node)
-    return sorted(new_level)
+    return sorted(new_level, reverse=True)
 
 
 def construct_huffman_tree(sorted_frequencies: List[FrequencyCountNode]) -> FrequencyCountNode:
