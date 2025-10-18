@@ -35,7 +35,7 @@ def construct_sorted_frequencies(string_to_be_counted_from: str) -> List[Frequen
     # could also use a dict for this, but I prefer this way.
     for character in sorted(string_to_be_counted_from):
         if len(counts) != 0 and counts[-1].character == character:
-            counts[-1].character
+            counts[-1].count += 1
         else:
             counts.append(FrequencyCount(character))
     return sorted(counts)
