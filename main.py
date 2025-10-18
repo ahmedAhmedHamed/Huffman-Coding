@@ -63,13 +63,17 @@ def construct_new_level_in_huffman_tree(current_level: List[FrequencyCountNode])
     new_level.append(new_node)
     return sorted(new_level)
 
-if __name__ == '__main__':
-    input_string = get_first_line_from_file('./input.txt')
-    sorted_frequencies = construct_sorted_frequencies(input_string)
+def construct_huffman_tree(sorted_frequencies: List[FrequencyCountNode]) -> FrequencyCountNode:
     new_level = construct_new_level_in_huffman_tree(sorted_frequencies)
     while len(new_level) > 1:
         new_level = construct_new_level_in_huffman_tree(new_level)
+    return new_level[0]
+
+if __name__ == '__main__':
+    input_string = get_first_line_from_file('./input.txt')
+    sorted_frequencies = construct_sorted_frequencies(input_string)
+    root_huffman_node = construct_huffman_tree(sorted_frequencies)
     print(input_string)
     print(sorted_frequencies)
-    print(new_level)
+    print(root_huffman_node)
 
