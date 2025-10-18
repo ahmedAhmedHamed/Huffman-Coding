@@ -33,3 +33,6 @@ def construct_sorted_frequencies(string_to_be_counted_from: str) -> List[Frequen
     return sorted(counts)
 
 
+if __name__ == '__main__':
+    input_string = get_first_line_from_file('./input.txt')
+    print(input_string)
