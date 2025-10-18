@@ -88,10 +88,16 @@ def get_character_encodings_through_tree(huffman_root_node: FrequencyCountNode) 
     return ret
 
 
-def get_huffman_character_encoding(string_to_get_encoding_from):
+def get_huffman_character_encoding(string_to_get_encoding_from: str):
     sorted_frequencies = construct_sorted_frequencies(string_to_get_encoding_from)
     root_huffman_node = construct_huffman_tree(sorted_frequencies)
     ret = get_character_encodings_through_tree(root_huffman_node)
+    return ret
+
+def encode_string(string_to_encode: str, character_mapping: dict[str, str]) -> str:
+    ret = ''
+    for character in string_to_encode:
+        ret += character_mapping[character]
     return ret
 
 
