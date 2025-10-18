@@ -16,24 +16,24 @@ def get_first_line_from_file(filepath: str) -> str:
 class FrequencyCountNode:
     count: int
     character: Optional[str]
-    leftChild: Optional[FrequencyCountNode]  = None
-    rightChild: Optional[FrequencyCountNode]  = None
-    def __init__(self, character = None) -> None:
+    leftChild: Optional[FrequencyCountNode] = None
+    rightChild: Optional[FrequencyCountNode] = None
+
+    def __init__(self, character=None) -> None:
         self.count = 1
         self.character = character
-    
+
     def __eq__(self, other):
         return self.count == other.count
-    
+
     def __lt__(self, other):
         return self.count < other.count
-    
+
     def __str__(self):
         if self.character:
             return f'({self.count}, {self.character})'
         else:
             return f'{str(self.leftChild)}, {str(self.rightChild)}'
-    
 
     def __repr__(self):
         return str(self)
@@ -52,7 +52,6 @@ def construct_sorted_frequencies(string_to_be_counted_from: str) -> List[Frequen
 
 
 def construct_new_level_in_huffman_tree(current_level: List[FrequencyCountNode]) -> List[FrequencyCountNode]:
-    
     new_level = copy.deepcopy(current_level)
     smallest_frequency = new_level[-1]
     second_smallest = new_level[-2]
@@ -79,4 +78,3 @@ if __name__ == '__main__':
     print(input_string)
     print(sorted_frequencies)
     print(root_huffman_node)
-
