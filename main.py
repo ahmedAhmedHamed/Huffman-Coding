@@ -80,6 +80,7 @@ def get_character_encodings_through_tree(huffman_root_node: FrequencyCountNode) 
             return
         # having a character means you are a leaf node.
         if current_node.character:
+            ret[current_prefix] = current_node.character
             ret[current_node.character] = current_prefix
         else:
             dfs(current_prefix + '1', current_node.leftChild)
@@ -94,6 +95,7 @@ def get_huffman_character_encoding(string_to_get_encoding_from: str):
     ret = get_character_encodings_through_tree(root_huffman_node)
     return ret
 
+
 def encode_string(string_to_encode: str, character_mapping: dict[str, str]) -> str:
     ret = ''
     for character in string_to_encode:
@@ -101,7 +103,25 @@ def encode_string(string_to_encode: str, character_mapping: dict[str, str]) -> s
     return ret
 
 
+def decode_string(string_to_decode: str, character_mapping: dict[str, str]) -> str:
+    ret = ''
+    current_chunk = ''
+    for character in string_to_decode:
+        current_chunk += character
+        if character_mapping.get(current_chunk):
+            ret += character_mapping.get(current_chunk)
+            current_chunk = ''
+    return ret
+
+
 if __name__ == '__main__':
     input_string = get_first_line_from_file('./first_lecture_example.txt')
     character_encoding = get_huffman_character_encoding(input_string)
+    encoded_string = encode_string(input_string, character_encoding)
+    decoded_string = decode_string(encoded_string, character_encoding)
+
     print(character_encoding)
+    print(f'size before encoding: {len(input_string) * 4}')
+    print(f'size after encoding: {len(encoded_string)}')
+    print(encoded_string)
+    print(decoded_string)
