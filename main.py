@@ -72,10 +72,25 @@ def construct_huffman_tree(sorted_frequencies: List[FrequencyCountNode]) -> Freq
     return new_level[0]
 
 
+def get_character_encodings_through_tree(huffman_root_node: FrequencyCountNode) -> dict[str, str]:
+    ret = {}
+
+    def dfs(current_prefix: str, current_node: FrequencyCountNode):
+        if current_node is None:
+            return
+        # having a character means you are a leaf node.
+        if current_node.character:
+            ret[current_node.character] = current_prefix
+        else:
+            dfs(current_prefix + '1', current_node.leftChild)
+            dfs(current_prefix + '0', current_node.rightChild)
+    dfs('', huffman_root_node)
+    return ret
+
+
 if __name__ == '__main__':
-    input_string = get_first_line_from_file('./input.txt')
+    input_string = get_first_line_from_file('./first_lecture_example.txt')
     sorted_frequencies = construct_sorted_frequencies(input_string)
     root_huffman_node = construct_huffman_tree(sorted_frequencies)
-    print(input_string)
-    print(sorted_frequencies)
-    print(root_huffman_node)
+    character_encoding = get_character_encodings_through_tree(root_huffman_node)
+    print(character_encoding)
