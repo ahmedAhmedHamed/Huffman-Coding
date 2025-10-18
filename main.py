@@ -38,7 +38,7 @@ def construct_sorted_frequencies(string_to_be_counted_from: str) -> List[Frequen
             counts[-1].count += 1
         else:
             counts.append(FrequencyCount(character))
-    return sorted(counts)
+    return sorted(counts, reverse=True)
 
 
 if __name__ == '__main__':
