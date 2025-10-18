@@ -1,10 +1,11 @@
 #!/usr/bin/python3
 from functools import total_ordering
 from typing import List
-input_string: str = ''
-with open('./input.txt') as input_file_content:
-    input_string = input_file_content.readline()
-print(input_string)
+def get_first_line_from_file(filepath: str) -> str:
+    ret: str = ''
+    with open('./input.txt') as input_file_content:
+        ret = input_file_content.readline()
+    return ret
 
 @total_ordering  # auto implement bigger than etc etc given less than.
 class FrequencyCount:
