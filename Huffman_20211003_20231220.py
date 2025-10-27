@@ -54,6 +54,10 @@ def construct_sorted_frequencies(string_to_be_counted_from: str) -> List[Frequen
 
 
 def construct_new_level_in_huffman_tree(current_level: List[FrequencyCountNode]) -> List[FrequencyCountNode]:
+    # Base case: only one node left → already the root
+    if len(current_level) == 1:
+        return current_level
+    
     new_level = copy.deepcopy(current_level)
     smallest_frequency = new_level[-1]
     second_smallest = new_level[-2]
@@ -77,6 +81,12 @@ def construct_huffman_tree(sorted_frequencies: List[FrequencyCountNode]) -> Freq
 def get_character_encodings_through_tree(huffman_root_node: FrequencyCountNode) -> tuple(dict[str, str], dict[str, str]):
     char_to_code = {}
     code_to_char = {}
+
+    # Handle single-character edge case
+    if huffman_root_node.leftChild is None and huffman_root_node.rightChild is None:
+        char_to_code[huffman_root_node.character] = '0'
+        code_to_char['0'] = huffman_root_node.character
+        return char_to_code, code_to_char
 
     def dfs(current_prefix: str, current_node: FrequencyCountNode):
         if current_node is None:
@@ -119,7 +129,7 @@ def decode_string(string_to_decode: str, character_mapping: dict[str, str]) -> s
 
 
 if __name__ == '__main__':
-    input_path = "input.txt"
+    input_path = "input2.txt"
     bin_path = "output.bin"
     dictionary_path = "overhead.json"
     decompressed_path = "decompressed.txt"
@@ -197,13 +207,3 @@ if __name__ == '__main__':
 
    
 
-    """
-
-print(character_encoding)
-    print(f'size before encoding: {len(input_string) * 4}')
-    print(f'size after encoding: {len(encoded_string)}')
-    print(encoded_string)
-    print(decoded_string)
-
-     """
-    
