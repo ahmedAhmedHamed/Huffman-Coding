@@ -151,9 +151,10 @@ if __name__ == '__main__':
     padding = (8 - (len(encoded_string) % 8)) % 8 # number of extra bits added the begining
     padded_bitstring = encoded_string + ("0" * padding)
     number_of_bytes = len(padded_bitstring) // 8
-    bytes_data = int(padded_bitstring, 2).to_bytes(number_of_bytes, byteorder='big')
     # convert string form of 0's and 1's to binary bytes
-    binary_encoded_message = int(encoded_string, 2).to_bytes(number_of_bytes, byteorder='big')
+    bytes_data = int(padded_bitstring, 2).to_bytes(number_of_bytes, byteorder='big')
+    
+   # binary_encoded_message = int(encoded_string, 2).to_bytes(number_of_bytes, byteorder='big')
 
 
 
@@ -178,7 +179,7 @@ if __name__ == '__main__':
 
     # Load overhead dictionary
     with open(dictionary_path, "r", encoding="utf-8") as f:
-        loaded_codeToChar = {v: k for k, v in loaded_charToCode.items()} #####  WHAT IS THAT
+        loaded_codeToChar = {v: k for k, v in loaded_charToCode.items()} 
     
     
 
